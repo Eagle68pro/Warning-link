@@ -7,24 +7,22 @@
 
   <style>
     :root{
-      --text: #111827;
-      --muted: #4b5563;
-      --border: #d1d5db;
-      --ok: #16a34a;
-      --warn: #dc2626;
+      --text:#111827;
+      --muted:#4b5563;
+      --border:#d1d5db;
+      --ok:#16a34a;
+      --warn:#dc2626;
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
+    * { box-sizing:border-box; }
 
     body{
       margin:0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:#ffffff;
+      font-family:system-ui, Arial;
+      background:#fff;
       color:var(--text);
       display:flex;
       justify-content:center;
-      align-items:center;
       padding:24px;
     }
 
@@ -34,14 +32,6 @@
       border:1px solid var(--border);
       border-radius:12px;
       padding:24px;
-    }
-
-    h1{ margin:8px 0; font-size:28px; }
-    h3{ margin-top:0; }
-
-    p.lead{
-      margin:0 0 16px 0;
-      color:var(--muted);
     }
 
     .badge{
@@ -74,13 +64,14 @@
       flex-direction:column;
       gap:10px;
       min-height:200px;
+      margin-top:12px;
     }
 
     .step{
       display:flex;
       align-items:center;
       gap:10px;
-      padding:8px 10px;
+      padding:8px;
       border:1px solid var(--border);
       border-radius:8px;
     }
@@ -95,127 +86,158 @@
     .step.ok .dot{ background:var(--ok); }
     .step.warn .dot{ background:var(--warn); }
 
-    .actions{
-      display:flex;
-      gap:10px;
-      margin-top:16px;
-      flex-wrap:wrap;
+    input{
+      width:100%;
+      padding:10px;
+      margin-top:6px;
+      border:1px solid var(--border);
+      border-radius:8px;
     }
 
-    button, a.btn{
-      border:1px solid var(--border);
-      background:#ffffff;
+    button{
+      margin-top:10px;
       padding:10px 14px;
+      border:1px solid var(--border);
+      background:#fff;
       border-radius:8px;
       cursor:pointer;
       font-weight:600;
-      text-decoration:none;
-      color:var(--text);
     }
 
     .hidden{ display:none; }
 
-    .footer{
-      font-size:13px;
+    .muted{
       color:var(--muted);
-      margin-top:12px;
-    }
-
-    details{
-      border:1px solid var(--border);
-      border-radius:8px;
-      padding:10px;
-    }
-
-    details summary{
-      font-weight:600;
-      cursor:pointer;
+      font-size:13px;
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="card">
-      <span class="badge">Suspicious Link Check</span>
-      <h1>Before you click random links…</h1>
-      <p class="lead">
-        This safe demo shows what could happen when opening unknown links.
-        Nothing here collects data or installs anything.
-      </p>
+<div class="wrap">
+  <div class="card">
 
-      <div class="row">
-        <div class="panel">
-          <div class="scan" id="scan"></div>
+    <span class="badge">Suspicious Link Check</span>
+    <h2>Phishing Awareness Simulation</h2>
+    <p class="muted">Educational tool only</p>
 
-          <div class="actions">
-            <button id="start">Run Safe Demo</button>
-            <button id="reset" class="hidden">Run Again</button>
-          </div>
+    <div class="row">
 
-          <div class="footer">Simulation only. No data leaves your device.</div>
-        </div>
+      <!-- LEFT -->
+      <div class="panel">
 
-        <div class="panel">
-          <h3>How to correctly make cereal</h3>
-          <ul style="line-height:1.6; margin-top:8px">
-            <li>Select a bowl of appropriate size.</li>
-            <li>Add cereal to the bowl first.</li>
-            <li>Pour milk slowly until desired coverage is achieved.</li>
-            <li>Eat promptly to maintain crunch.</li>
-          </ul>
+        <label><b>Student ID</b></label>
+        <input id="studentId" placeholder="e.g. Loh@001 (max 20 chars)" />
 
-          <details>
-            <summary>Advanced cereal techniques</summary>
-            <ul style="line-height:1.6; margin-top:8px">
-              <li>Cold milk preserves texture best.</li>
-              <li>Refill cereal, not milk, to avoid sogginess.</li>
-              <li>Multiple cereals may be combined at your own risk.</li>
-            </ul>
-          </details>
-        </div>
+        <div class="scan" id="scan"></div>
+
+        <button id="start">Run Safe Demo</button>
+        <button id="reset" class="hidden">Run Again</button>
+
+        <p class="muted">Results are saved for teacher review.</p>
       </div>
+
+      <!-- RIGHT -->
+      <div class="panel">
+        <h3>Safety Tips</h3>
+        <ul>
+          <li>Check sender address carefully</li>
+          <li>Never trust urgency messages</li>
+          <li>Do not enter passwords from unknown links</li>
+        </ul>
+      </div>
+
     </div>
   </div>
+</div>
 
-  <script>
-    const scanEl = document.getElementById('scan');
-    const startBtn = document.getElementById('start');
-    const resetBtn = document.getElementById('reset');
+<script>
+const scanEl = document.getElementById("scan");
+const startBtn = document.getElementById("start");
+const resetBtn = document.getElementById("reset");
 
-    const steps = [
-      'Inspecting link format…',
-      'Checking site reputation…',
-      'Looking for urgency tactics…',
-      'Simulating fake login page…',
-      'Conclusion: Risky behavior detected.'
-    ];
+const steps = [
+  "Inspecting link format…",
+  "Checking reputation…",
+  "Detecting urgency tactics…",
+  "Simulating fake login page…",
+  "Risk analysis complete."
+];
 
-    function clearScan(){
-      scanEl.innerHTML = '';
-      resetBtn.classList.add('hidden');
-      startBtn.disabled = false;
-    }
+function clearScan(){
+  scanEl.innerHTML = "";
+  resetBtn.classList.add("hidden");
+  startBtn.disabled = false;
+}
 
-    async function runScan(){
-      clearScan();
-      startBtn.disabled = true;
+async function runScan(){
+  clearScan();
+  startBtn.disabled = true;
 
-      for (let i = 0; i < steps.length; i++) {
-        const div = document.createElement('div');
-        div.className = 'step';
-        div.innerHTML = `<span class="dot"></span><span>${steps[i]}</span>`;
-        scanEl.appendChild(div);
-        await new Promise(r => setTimeout(r, 700));
-        div.classList.add(i === steps.length - 1 ? 'warn' : 'ok');
-      }
+  for (let i=0; i<steps.length; i++){
+    const div = document.createElement("div");
+    div.className = "step";
+    div.innerHTML = `<span class="dot"></span><span>${steps[i]}</span>`;
+    scanEl.appendChild(div);
 
-      resetBtn.classList.remove('hidden');
-      startBtn.disabled = false;
-    }
+    await new Promise(r => setTimeout(r, 600));
+    div.classList.add(i === steps.length-1 ? "warn" : "ok");
+  }
 
-    startBtn.addEventListener('click', runScan);
-    resetBtn.addEventListener('click', clearScan);
-  </script>
+  resetBtn.classList.remove("hidden");
+  startBtn.disabled = false;
+
+  // VALIDATION (20 chars max, any symbols allowed)
+  const studentId = document.getElementById("studentId").value.trim();
+
+  if (!studentId) {
+    alert("Enter Student ID");
+    return;
+  }
+
+  if (studentId.length > 20) {
+    alert("Max 20 characters allowed");
+    return;
+  }
+
+  // SAVE
+  if (window.saveCompletion) {
+    window.saveCompletion(studentId);
+  }
+}
+
+startBtn.addEventListener("click", runScan);
+resetBtn.addEventListener("click", clearScan);
+</script>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBDqi8yaE77N86tFqAKPMdQ7vyAJAz77Lo",
+  authDomain: "cyber-training-26b9b.firebaseapp.com",
+  projectId: "cyber-training-26b9b",
+  storageBucket: "cyber-training-26b9b.appspot.com",
+  messagingSenderId: "449151070259",
+  appId: "1:449151070259:web:23fa8c2e2ab45be5637346"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// expose function to main script
+window.saveCompletion = async function(studentId){
+  if(!studentId) return;
+
+  await addDoc(collection(db, "completions"), {
+    studentId,
+    completed: true,
+    time: new Date().toISOString()
+  });
+};
+</script>
+
 </body>
 </html>
